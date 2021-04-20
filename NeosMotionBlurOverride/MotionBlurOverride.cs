@@ -13,6 +13,12 @@ namespace NeosMotionBlurOverride
     [Category("Epsilion")]
     class MotionBlurOverride : Component, ICustomInspector
     {
+        public readonly Sync<bool> IgnoreVRCameras;
+        protected override void OnAttach()
+        {
+            IgnoreVRCameras.Value = true;
+            base.OnAttach();
+        }
         public void BuildInspectorUI(UIBuilder ui)
         {
             WorkerInspector.BuildInspectorUI(this, ui);
@@ -39,19 +45,19 @@ namespace NeosMotionBlurOverride
             UniLog.Log($"[Motion Blur]\tFound {headOutputDevices.Length} HeadOutput instances");
             foreach (HeadOutput headOutputDevice in headOutputDevices)
             {
-                //Ignore cameras that aren't for screen mode.
-                if (headOutputDevice.Type == HeadOutput.HeadOutputType.Screen)
+                //Ignore cameras that aren't for screen mode. - unless we really want to suffer.
+                if (headOutputDevice.Type == HeadOutput.HeadOutputType.Screen || !IgnoreVRCameras.Value)
                 {
                     UniLog.Log($"[Motion Blur]\tFound Screen Mode HeadOuptut");
                     //Disable motion blur for future changes to this output
-                    headOutputDevice.AllowMotionBlur = false;
+                    headOutputDevice.AllowMotionBlur = !Enabled;
                     //For each camera allocated to the HeadOutput, disable Motion Blur
                     //In screen mode, there should only be one camera.
-                    foreach (UnityEngine.Camera cam in headOutputDevice.cameras)
+                    foreach (UnityEngine.Camera outputCamera in headOutputDevice.cameras)
                     {
-                        if (cam.enabled)
+                        if (outputCamera.enabled)
                         {
-                            PostProcessLayer postProc = cam.GetComponent<PostProcessLayer>();
+                            PostProcessLayer postProc = outputCamera.GetComponent<PostProcessLayer>();
                             if (postProc is null)
                             {
                                 UniLog.Log("[Motion Blur]\tOutput Camera has no PostProcessingLayer");
