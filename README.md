@@ -1,6 +1,5 @@
-# NeosSimpleUtilities
-A Plugin for NeosVR that provides several useful utility features
-
+# NeosUtilities #
+A Plugin for [NeosVR](https://neos.com/) that provides several useful utility features
 
 **This component is to be used for testing only.**
 
@@ -8,8 +7,19 @@ A Plugin for NeosVR that provides several useful utility features
 
 **Message Epsilion for more details.**
 
-# Installation
-* Download the latest NeosSimpleUtilities.dll from [Releases](https://github.com/Aerizeon/NeosSimpleUtilities/releases)
+
+## Simple Utilities ##
+
+### Tools ###
+* **Logix Cleanup Tool**
+  * Removes all unused `LogixReference` and `LogixInterfaceProxy` nodes from a given slot and its children.
+* **MonoPack Tool**
+  * Packs all child LogiX nodes under a single slot.
+* **Motion Blur Override**
+  * Enables or disables Motion Blur on the currently used HeadOutputDevice
+
+### Installation ###
+* Download the latest NeosSimpleUtilities.dll from [Releases](https://github.com/Aerizeon/NeosUtilities/releases)
 * Copy the dll to the NeosVR **Libraries** directory
 * Add `-LoadAssembly "Libraries\NeosSimpleUtilities.dll"` to your NeosVR launch options.
 * Open your **Local** Home world in Neos
