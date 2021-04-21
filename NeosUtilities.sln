@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeosMotionBlurOverride", "NeosMotionBlurOverride\NeosMotionBlurOverride.csproj", "{E2EFD379-1AEB-4C36-93A5-480193895640}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeosSimpleUtilities", "NeosSimpleUtilities\NeosSimpleUtilities.csproj", "{E2EFD379-1AEB-4C36-93A5-480193895640}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

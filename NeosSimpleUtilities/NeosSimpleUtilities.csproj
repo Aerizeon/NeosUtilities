@@ -7,8 +7,8 @@
     <ProjectGuid>{E2EFD379-1AEB-4C36-93A5-480193895640}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NeosMotionBlurOverride</RootNamespace>
-    <AssemblyName>NeosMotionBlurOverride</AssemblyName>
+    <RootNamespace>NeosSimpleUtilities</RootNamespace>
+    <AssemblyName>NeosSimpleUtilities</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,9 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MotionBlurOverride.cs" />
+    <Compile Include="LogixCleanupTool\LogixCleanupTool.cs" />
+    <Compile Include="MonoPack\MonoPackTool.cs" />
+    <Compile Include="MotionBlurOverride\MotionBlurOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).dll" "C:\Program Files (x86)\Steam\steamapps\common\NeosVR\Libraries\$(TargetName).dll</PostBuildEvent>

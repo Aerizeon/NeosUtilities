@@ -1,16 +1,11 @@
 ﻿using BaseX;
 using FrooxEngine;
 using FrooxEngine.UIX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine.Rendering.PostProcessing;
 
-namespace NeosMotionBlurOverride
+namespace NeosSimpleUtilities.MotionBlurOverride
 {
-    [Category("Epsilion")]
+    [Category("Epsilion/Utilities")]
     class MotionBlurOverride : Component, ICustomInspector
     {
         public readonly Sync<bool> IgnoreVRCameras;
