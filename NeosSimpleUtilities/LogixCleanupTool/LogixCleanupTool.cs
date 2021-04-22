@@ -18,12 +18,24 @@ namespace NeosSimpleUtilities.LogixCleanupTool
         {
             if(TargetSlot.Target != null)
             {
-                TargetSlot.Target.RemoveAllComponents((Component targetComponent) => {
-                    if (targetComponent is LogixReference targetLogixReference)
-                        return targetLogixReference.RefTarget.Target == null;
-                    return targetComponent is LogixInterfaceProxy;
-                });
+                int totalRemovedComponents = RemoveUnusedLogixComponents(TargetSlot.Target);
+                button.LabelText = $"Removed {totalRemovedComponents} components.";
             }
+        }
+
+        private int RemoveUnusedLogixComponents(Slot targetSlot)
+        {
+            int removedComponentCount = targetSlot.RemoveAllComponents((Component targetComponent) => {
+                if (targetComponent is LogixReference targetLogixReference)
+                    return targetLogixReference.RefTarget.Target is null;
+                return targetComponent is LogixInterfaceProxy;
+            });
+
+            foreach (Slot childSlot in targetSlot.Children)
+            {
+                removedComponentCount += RemoveUnusedLogixComponents(childSlot);
+            }
+            return removedComponentCount;
         }
     }
 }

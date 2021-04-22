@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogixCleanupTool\LogixCleanupTool.cs" />
-    <Compile Include="MonoPack\MonoPackTool.cs" />
+    <Compile Include="MonoPackTool\MonoPackTool.cs" />
     <Compile Include="MotionBlurOverride\MotionBlurOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
