@@ -27,7 +27,7 @@ namespace NeosSimpleUtilities.LogixCleanupTool
         {
             int removedComponentCount = targetSlot.RemoveAllComponents((Component targetComponent) => {
                 if (targetComponent is LogixReference targetLogixReference)
-                    return targetLogixReference.RefTarget.Target is null;
+                    return targetLogixReference.RefTarget.Target is null || targetLogixReference.RefNode.Target is null;
                 return targetComponent is LogixInterfaceProxy;
             });
 
