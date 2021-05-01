@@ -56,7 +56,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvatarStrippingTool\AvatarStrippingTool.cs" />
     <Compile Include="LogixCleanupTool\LogixCleanupTool.cs" />
+    <Compile Include="MonoPackTool\MonoPack.cs" />
+    <Compile Include="MonoPackTool\LogiX\MonoPackSlot.cs" />
     <Compile Include="MonoPackTool\MonoPackTool.cs" />
     <Compile Include="MotionBlurOverride\MotionBlurOverride.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
