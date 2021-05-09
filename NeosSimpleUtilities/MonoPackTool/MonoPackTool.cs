@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace NeosSimpleUtilities.MonoPackTool
 {
-    [Category("Epsilion/Utilities")]
+    [Category("Add-Ons/Optimization")]
     public class MonoPackTool : Component, ICustomInspector
     {
         public readonly SyncRef<Slot> PackingRoot;

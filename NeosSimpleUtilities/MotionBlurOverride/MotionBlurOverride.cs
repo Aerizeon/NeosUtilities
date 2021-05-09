@@ -5,7 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 namespace NeosSimpleUtilities.MotionBlurOverride
 {
-    [Category("Epsilion/Utilities")]
+    [Category("Add-Ons/Optimization")]
     class MotionBlurOverride : Component, ICustomInspector
     {
         public readonly Sync<bool> IgnoreVRCameras;

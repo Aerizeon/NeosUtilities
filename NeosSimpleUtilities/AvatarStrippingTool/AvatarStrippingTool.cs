@@ -4,12 +4,14 @@ using FrooxEngine.UIX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NeosSimpleUtilities.AvatarStrippingTool
 {
-    [Category("Epsilion/Utilities")]
+
+    [Category("Add-Ons/Optimization")]
     class ColliderCleanupTool : Component, ICustomInspector
     {
         public readonly SyncRef<Slot> TargetSlot;

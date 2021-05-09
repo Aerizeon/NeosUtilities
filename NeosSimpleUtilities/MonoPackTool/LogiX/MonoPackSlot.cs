@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NeosSimpleUtilities.MonoPackTool.LogiX
 {
-    [Category("LogiX/Epsilion/Utility")]
+    [Category("LogiX/Add-Ons/Optimization")]
     class MonoPackSlot : LogixNode
     {
         public readonly Input<Slot> TargetSlot;
