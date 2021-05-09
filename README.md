@@ -12,7 +12,7 @@ A Plugin for [NeosVR](https://neos.com/) that provides several useful utility fe
 
 ### Tools ###
 * **Logix Cleanup Tool**
-  * Removes all unused `LogixReference` and `LogixInterfaceProxy` nodes from a given slot and its children.
+  * Removes all unused `LogixReference`, `LogixInterfaceProxy` and `Relay` nodes from a given slot and its children.
 * **MonoPack Tool**
   * Packs all child LogiX nodes under a single slot.
 * **Motion Blur Override**
