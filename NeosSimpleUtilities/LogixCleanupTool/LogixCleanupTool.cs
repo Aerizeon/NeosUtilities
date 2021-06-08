@@ -23,31 +23,12 @@ namespace NeosSimpleUtilities.LogixCleanupTool
         {
             if(TargetSlot.Target != null)
             {
-                int totalRemovedComponents = OptimizeLogiX(TargetSlot.Target);
-                button.LabelText = $"Removed {totalRemovedComponents} components.";
-            }
-        }
-
-        private int OptimizeLogiX(Slot targetSlot)
-        {
-            List<Component> componentsForRemoval = targetSlot.GetComponentsInChildren((Component targetComponent) =>
-            {
-                if (RemoveLogixReferences.Value && targetComponent is LogixReference targetLogixReference)
-                    return targetLogixReference.RefTarget.Target is null || targetLogixReference.RefNode.Target is null;
-                else if (RemoveLogixInterfaceProxies.Value && targetComponent is LogixInterfaceProxy)
-                    return true;
-                else if (RemoveRelays.Value)
+                World.Coroutines.StartTask(async () =>
                 {
-                    Type componentType = targetComponent.GetType();
-                    return (componentType.IsGenericType && componentType.GetGenericTypeDefinition() == typeof(RelayNode<>)) || targetComponent is ImpulseRelay;
-                }
-                return false;
-            });
-
-            foreach (Component c in componentsForRemoval)
-                c.Destroy();
-
-            return componentsForRemoval.Count;
+                    int totalRemovedComponents = await MonoPackTool.MonoPack.OptimizeLogiX(TargetSlot.Target, RemoveLogixReferences.Value, RemoveLogixInterfaceProxies.Value, RemoveRelays.Value, true);
+                    button.LabelText = $"Removed {totalRemovedComponents} components.";
+                });
+            }
         }
     }
 }

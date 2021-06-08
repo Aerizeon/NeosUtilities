@@ -103,6 +103,52 @@ namespace NeosSimpleUtilities.MonoPackTool
             }
             return movedNodes;
         }
+        public static async Task<int> OptimizeLogiX(Slot targetSlot, bool RemoveReferences, bool RemoveInterfaceProxies, bool RemoveRelays, bool DestroyParent = false)
+        {
+            if (targetSlot == null)
+                return 0;
+            //In order for relay removal to work properly, all of the LogiX must first be unpacked.
+            //that way, Neos will regenerate the wire links upon removal.
+            if (RemoveRelays)
+                targetSlot.GetComponentsInChildren<LogixNode>().ForEach((n => n.GenerateVisual()));
+            await new Updates(10);
+            List<Component> componentsForRemoval = targetSlot.GetComponentsInChildren((Component targetComponent) =>
+            {
+                //Collect all LogiXReference and LogixInterfaceProxies for deletion
+                if ((RemoveReferences && targetComponent is LogixReference) ||
+                (RemoveInterfaceProxies && targetComponent is LogixInterfaceProxy))
+                {
+                    return true;
+                }
+                //If we have opted to remove relays, collect them as well.
+                else if (RemoveRelays)
+                {
+                    Type componentType = targetComponent.GetType();
+                    return (componentType.IsGenericType && componentType.GetGenericTypeDefinition() == typeof(RelayNode<>)) || targetComponent is ImpulseRelay;
+                }
+                return false;
+            });
+
+
+            foreach (Component targetComponent in componentsForRemoval)
+            {
+                //Get parent of the component to be removed
+                Slot parent = targetComponent.Slot;
+                //Destroy the component. If the logix is unpacked, this will regenerate any necessary connections.
+                targetComponent.Destroy();
+                //If DestroyParent is enabled, and the target isn't a component that gets embedded on a normal slot,
+                //we should destroy the parent slot, which normally contains the component.
+                if (DestroyParent && !(targetComponent is LogixReference || targetComponent is LogixInterfaceProxy) && parent != targetSlot)
+                    parent.Destroy();
+            }
+
+            //If we were removing relays, we must pack everything back up so it's not hanging out all over the place (and presumably, so we can monopack)
+            if (RemoveRelays)
+                targetSlot.GetComponentInChildren<LogixNode>().RemoveAllLogixBoxes();
+            await new Updates(10);
+            //Return the total number of affected components.
+            return componentsForRemoval.Count;
+        }
     }
 
     public class LogixSlotTarget
