@@ -19,7 +19,7 @@ namespace NeosSimpleUtilities.MonoPackTool
             ui.Style.MinHeight = 80f;
             ui.Text("Keep a separate backup of your project, both before and after using this tool - the process is <b>NOT</b> reversable at this time.\n" +
                 "<b>I am not responsible for any work lost as a result of using this tool<b>.\n" +
-                "Please test any LogiX packed using this tool <b>Extensively</b>, as it may cause issues" +
+                "Please test any LogiX packed using this tool <b>Extensively</b>, as it may cause issues\n" +
                 "with some logic flows, especially when LogiX is modifying values inside of itself in weird ways.\n" +
                 "If you encounter any issues, please contact Epsilion, and send a copy of the relevant Neos logfile.", true, Alignment.TopCenter);
             ui.PopStyle();
