@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace NeosSimpleUtilities.MonoPackTool.LogiX
 {
+    /*
+     * LogiX node for executing the MonoPack
+     * operation automatically.
+     * This doesn't work with an object root
+     * yet, because I'm lazy, so you have to
+     * pass in each LogiX root manually.
+     */
+
     [Category("LogiX/Add-Ons/Optimization")]
     class MonoPackSlot : LogixNode
     {

@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace NeosSimpleUtilities.AvatarStrippingTool
 {
+    /*
+     * Tool for removing non-IK components from avatars
+     * so that they can be placed in a world, and not have 
+     * an excessive amount of unused components (and slots)
+     * on them.
+     * Requested by Enverex
+     */
 
     [Category("Add-Ons/Optimization")]
-    class ColliderCleanupTool : Component, ICustomInspector
+    class AvatarStrippingTool : Component, ICustomInspector
     {
         public readonly SyncRef<Slot> TargetSlot;
         public readonly Sync<bool> OnlyRemoveDisabled;
@@ -27,7 +34,7 @@ namespace NeosSimpleUtilities.AvatarStrippingTool
         {
             if (TargetSlot.Target != null)
             {
-                int totalRemovedComponents = RemoveColliders(TargetSlot.Target);
+                int totalRemovedComponents = RemoveComponents(TargetSlot.Target);
                 button.LabelText = $"Removed {totalRemovedComponents} components.";
             }
         }
@@ -35,13 +42,20 @@ namespace NeosSimpleUtilities.AvatarStrippingTool
         {
             if (TargetSlot.Target != null)
             {
-                int totalRemovedSlots = RemoveSlots(TargetSlot.Target);
+                int totalRemovedSlots = RemoveHapticsSlots(TargetSlot.Target);
                 button.LabelText = $"Removed {totalRemovedSlots} Haptic Slots.";
             }
         }
 
-        private int RemoveColliders(Slot targetSlot)
+        private int RemoveComponents(Slot targetSlot)
         {
+            /*
+             * For Enverex's purposes, none of these are useful,
+             * so we strip out all colliders and other normal
+             * avatar components, since only the IK system
+             * is needed
+             */
+
             int removedComponentCount = targetSlot.RemoveAllComponents((Component targetComponent) => {
                 return (targetComponent is ICollider ||
                 targetComponent is HandPoser ||
@@ -58,13 +72,18 @@ namespace NeosSimpleUtilities.AvatarStrippingTool
 
             foreach (Slot childSlot in targetSlot.Children)
             {
-                removedComponentCount += RemoveColliders(childSlot);
+                removedComponentCount += RemoveComponents(childSlot);
             }
             return removedComponentCount;
         }
 
-        private int RemoveSlots(Slot targetSlot)
+        private int RemoveHapticsSlots(Slot targetSlot)
         {
+            /*
+             * Removes the Haptics slots. Since this object
+             * will no longer be a usable avatar, haptics
+             * aren't necessary.
+             */
             int removedSlots = 0;
             targetSlot.DestroyChildren(false, false, false, (Slot childSlot) =>
             {
@@ -78,7 +97,7 @@ namespace NeosSimpleUtilities.AvatarStrippingTool
 
             foreach (Slot childSlot in targetSlot.Children)
             {
-                removedSlots += RemoveSlots(childSlot);
+                removedSlots += RemoveHapticsSlots(childSlot);
             }
             return removedSlots;
         }

@@ -6,6 +6,12 @@ using System.Collections.Generic;
 
 namespace NeosSimpleUtilities.LogixCleanupTool
 {
+    /*
+     * Optimizes LogiX by removing Relays, References
+     * and Interface Proxies
+     * (if given an object root, and not a LogiX root)
+     */
+
     [Category("Add-Ons/Optimization")]
     public class LogixCleanupTool : Component, ICustomInspector
     {
