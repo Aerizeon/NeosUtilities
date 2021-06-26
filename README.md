@@ -1,11 +1,11 @@
 # NeosUtilities #
 A Plugin for [NeosVR](https://neos.com/) that provides several useful utility features
 
-**This component is to be used for testing only.**
+**Save a backup of your items, before using these tools**
 
-**Please do not include it in any public distributions.**
+**I am not responsible for any work lost because you didn't save a backup**
 
-**Message Epsilion for more details.**
+**Extensively test all LogiX after using this these tools, as things may break in unexpected ways**
 
 
 ## Simple Utilities ##
@@ -17,6 +17,8 @@ A Plugin for [NeosVR](https://neos.com/) that provides several useful utility fe
   * Packs all child LogiX nodes under a single slot.
 * **Motion Blur Override**
   * Enables or disables Motion Blur on the currently used HeadOutputDevice
+* **Avatar Stripping Tool**
+  * Removes all non-IK components from an avatar, so it can be used as a prop in the world.
 
 ### Installation ###
 * Download the latest NeosSimpleUtilities.dll from [Releases](https://github.com/Aerizeon/NeosUtilities/releases)
@@ -24,4 +26,8 @@ A Plugin for [NeosVR](https://neos.com/) that provides several useful utility fe
 * Add `-LoadAssembly "Libraries\NeosSimpleUtilities.dll"` to your NeosVR launch options.
 * Open your **Local** Home world in Neos
 * Create a slot named `Plugins` on root, if it does not exist.
-* Attach the components you wish to load from the **Epsilion/Utilities** folder.
+* Attach the components you wish to load from the **Add-Ons/Optimization** folder.
+
+## Advanced Utilities ##
+
+*Nothing here yet!*
